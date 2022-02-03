@@ -70,6 +70,10 @@ main.ativo {
   height: 100px;
 }
 
+.carta.desabilitado {
+  pointer-events: none;
+}
+
 .back-face,
 .front-face {
   width: 100%;
@@ -90,10 +94,14 @@ main.ativo {
   transform: rotateY(180deg);
 }
 
-.back-face.rotate {
+.back-face.girar {
   transform: rotateY(-180deg);
 }
 
-.front-face.rotate {
+.front-face.girar{
   transform: rotateY(0deg);
+}
+
+.carta.achou{
+  pointer-events: none;
 }
