@@ -1,5 +1,7 @@
 const botao = document.querySelector('button');
 const main = document.querySelector('main');
+const relogio = document.querySelector('span');
+let intervalo;
 let contadorPrimeiraCarta = 2;
 let paresVirados = 0;
 let primeiraCarta;
@@ -28,7 +30,7 @@ let paresCriados;
 
 function escolherQtdDeCartas() {
   qtdCartas = prompt(
-    'Bem vindo ao Parrot Card Game! Escolha o úmero de cartas: \n Escolha um número par entre 4 e 14'
+    'Bem-vindo ao Parrot Card Game!\nEscolha o número de cartas:\nO número deve ser par entre 4 e 14'
   );
 }
 
@@ -42,13 +44,15 @@ botao.onclick = function iniciarJogo() {
   pegarInfoCartas();
   criarCartas();
   habilitarJogo();
+  intervalo = setInterval(contarTempo, 1000);
 };
 
 function criarCartas() {
   for (let i = 0; i < cartasSelecionadas.length; i++) {
     main.innerHTML +=
-      `<div onclick='virarCarta(this)' class='carta ${cartasSelecionadas[i].nome}'><div class='front-face'><img src='./assets/${cartasSelecionadas[i].nome}.gif' alt=''></div>` +
-      "<div class='back-face'><img src='./assets/back.png' alt=''></div></div>";
+      `<div onclick='virarCarta(this)' class='carta ${cartasSelecionadas[i].nome}' data-identifier='card'><div class='front-face' data-identifier="front-face"><img src='./assets/${cartasSelecionadas[i].nome}.gif' alt=''>
+      </div>` + 
+       "<div class='back-face' data-identifier='back-face'><img src='./assets/back.png' alt=''></div></div>";
   }
 }
 
@@ -142,14 +146,18 @@ function validarSegundaCarta(carta){
 }
 function acabarJogo() {
   if (paresVirados / paresCriados === 1){
-    alert(`Parabéns, você ganhou em ${(contadorPrimeiraCarta - 2)/2} jogadas`)
-    let resposta =  prompt('Gostaria de jogar mais?\nSe sim, digite:"Sim"')
-    if(resposta.toLocaleLowerCase() === 'sim')  {
+    clearInterval(intervalo)
+    alert(`Parabéns, você ganhou em ${(contadorPrimeiraCarta - 2)} jogadas!\nTempo Total: ${relogio.innerHTML} segundos`)
+    let resposta =  prompt('Gostaria de jogar mais?\nRespostas válidas:\nSim\nNao')
+    
+    if (resposta.toLocaleLowerCase() === 'sim'){
       window.location.reload()
+      
     }
-    else{
-
+    else if(resposta.toLocaleLowerCase() === 'nao'){
+      alert('Obrigado por jogar!\n\nVolte sempre!')
     }
+    
   }
 }
 
@@ -169,3 +177,7 @@ function desbloquearClique(){
   }
 }
 
+function contarTempo(){
+  relogio.classList.add('ligar')
+  relogio.innerHTML = parseInt(relogio.innerHTML) + 1;
+}
