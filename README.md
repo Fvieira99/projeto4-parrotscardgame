@@ -25,5 +25,14 @@
 <!-- ## Preview
 
 um gif da aplicação bem maneiro -->
+
+## Demonstration
+</br> 
+
+![ParrotCardGame-Gif](https://user-images.githubusercontent.com/72287439/190717679-cba9545d-30a8-4c29-b877-6d40c58ed850.gif#center)
+
+
+
+
  
 </div>
